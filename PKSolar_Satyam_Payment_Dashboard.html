@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PKSolar | Satyam Electrical &amp; Engineers — Finance Dashboard</title>
+<style>
+:root{--navy:#050914;--blue:#367dff;--teal:#16c5bd;--bg:#070b14;--ink:#eef4ff;--muted:#93a4c2;--line:rgba(135,171,235,.18);--red:#ff667a;--gold:#ffd447;--glass:rgba(17,28,51,.68)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at 5% 0%,#102b5b 0,transparent 35%),radial-gradient(ellipse at 95% 15%,#18244a 0,transparent 28%),linear-gradient(135deg,#05070d,#080e1c 55%,#060913);background-attachment:fixed;color:var(--ink);min-height:100vh}
+header{padding:26px 22px 20px;background:linear-gradient(120deg,rgba(3,7,16,.97),rgba(13,31,67,.96));color:#fff;position:relative;overflow:hidden;border-bottom:1px solid rgba(85,139,255,.3);box-shadow:0 18px 55px #0006}header:after{content:"";position:absolute;width:340px;height:340px;right:5%;top:-230px;border-radius:50%;border:1px solid #ffffff25;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff05;pointer-events:none}
+.wrap{max-width:1400px;margin:auto}header .top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;position:relative;z-index:1}.brandlock{display:flex;align-items:center;gap:15px}.brandmark{width:60px;height:60px;flex:0 0 60px;border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(42,91,171,.1));border:1px solid rgba(255,255,255,.3);box-shadow:0 10px 32px #0006,inset 0 1px 0 rgba(255,255,255,.25),0 0 22px rgba(255,212,71,.08);display:grid;place-items:center;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}.brand{display:flex;align-items:center;gap:13px;flex-wrap:wrap;font-size:clamp(20px,2.4vw,28px);font-weight:800;letter-spacing:-.65px;line-height:1.2}.brand-primary{color:#fff!important;font-size:1.08em;letter-spacing:-1px}.brand-separator{color:#ffd447!important;font-weight:400;opacity:.9}.brand-partner{font-size:clamp(11px,1.25vw,15px);letter-spacing:1.05px;font-weight:800;color:#f4f7ff!important}.brand-partner small{display:block;font-size:.72em;letter-spacing:2.15px;color:#9db8df;margin-top:4px}.brand span{color:#7ee6d0}.subtitle{color:#c8d8f4;margin-top:7px;font-size:13px;letter-spacing:.25px}.tag{border:1px solid #ffffff38;background:#ffffff12;backdrop-filter:blur(14px);padding:10px 15px;border-radius:30px;font-size:12px;font-weight:700;color:#edf4ff;box-shadow:inset 0 1px #ffffff1c}
+main{max-width:1400px;margin:25px auto;padding:0 20px 38px}.welcome{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:0 2px 18px}.welcome h1{font-size:23px;letter-spacing:-.5px;margin:0}.welcome p{margin:6px 0 0;color:var(--muted);font-size:13px}.welcome .today{font-size:12px;color:#526580;background:#ffffff80;border:1px solid #ffffffc9;border-radius:12px;padding:9px 12px;box-shadow:0 5px 18px #24446a0a}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:20px}.card{position:relative;overflow:hidden;background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:19px 18px;box-shadow:0 10px 30px #28466a0d,inset 0 1px 0 #ffffffd9;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #28466a16,inset 0 1px 0 #fff}.card:after{content:"";position:absolute;right:-27px;top:-35px;width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#3978f615,#13b89a0c);pointer-events:none}.card .label{font-size:10px;color:#71809a;font-weight:800;text-transform:uppercase;letter-spacing:1px}.card .amount{font-size:clamp(19px,2vw,27px);font-weight:800;letter-spacing:-.7px;margin-top:13px;overflow-wrap:anywhere;position:relative;z-index:1}.card .hint{font-size:11px;color:#8290a6;margin-top:7px}.green{color:#0c9d80}.red{color:var(--red)}.blue{color:var(--blue)}.gold{color:#c78a17}
+.layout{display:grid;grid-template-columns:350px minmax(0,1fr);gap:18px;align-items:start}.panel{background:rgba(255,255,255,.72);border:1px solid #ffffffd9;border-radius:20px;box-shadow:0 12px 36px #24446a12,inset 0 1px 0 #ffffff;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden}.panel-head{padding:19px 20px;border-bottom:1px solid #dce5f2b8;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(110deg,#ffffffa6,#f7faff70)}.panel-head h2{font-size:15px;letter-spacing:-.15px;margin:0;font-weight:800}.panel-body{padding:20px}
+label{display:block;font-size:11px;font-weight:800;color:#53637c;margin-bottom:7px;letter-spacing:.2px}input,select,textarea{width:100%;border:1px solid #dbe4f0;border-radius:11px;padding:12px 12px;font-size:13px;color:var(--ink);background:rgba(255,255,255,.82);outline:none;transition:border .2s,box-shadow .2s;font-family:inherit}input:focus,select:focus,textarea:focus{border-color:#76a0fa;box-shadow:0 0 0 4px #3978f61a;background:#fff}.field{margin-bottom:14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}button{border:0;border-radius:11px;padding:11px 14px;font-size:12px;font-weight:800;cursor:pointer;transition:transform .15s,filter .15s;font-family:inherit}button:hover{filter:brightness(.98);transform:translateY(-1px)}.primary{background:linear-gradient(135deg,#3978f6,#245bd1);color:#fff;width:100%;box-shadow:0 7px 16px #3978f632}.secondary{background:#eaf1ff;color:#285ac0;border:1px solid #dbe7ff}.danger{background:#fff0f1;color:#b9364a;border:1px solid #ffe0e3}.plain{background:#f0f3f9;color:#46566e;border:1px solid #e3e9f2}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1}.note{font-size:11px;color:#78869c;line-height:1.65;margin-top:13px;background:#f5f8fd;border:1px solid #e8eef7;border-radius:11px;padding:11px 12px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid #e2e9f3}.toolbar input{flex:1;min-width:150px}.toolbar select{width:auto;min-width:140px;flex:0 1 auto}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:760px}th,td{text-align:left;padding:14px 13px;border-bottom:1px solid #e8eef6;font-size:12px;vertical-align:top}th{font-size:10px;color:#75849b;text-transform:uppercase;letter-spacing:.8px;background:#f7faffc9;position:sticky;top:0}tbody tr:hover{background:#f5f8ffb8}td.amount-cell{font-weight:800;white-space:nowrap}.pill{display:inline-block;padding:6px 9px;border-radius:20px;font-size:10px;font-weight:800;white-space:nowrap}.in{background:#dff8f0;color:#087d67}.out{background:#fff0e4;color:#ad5a13}.loan{background:#e9efff;color:#3159bb}.solar{background:#fff7d9;color:#946500}.empty{text-align:center;padding:42px 15px;color:var(--muted);font-size:13px}.smallbtn{padding:7px 9px;margin:2px;font-size:10px}.foot{font-size:11px;color:#8794a8;text-align:center;padding:20px}.panel-head .actions{justify-content:flex-end}.panel-head .actions button{flex:0 0 auto}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}.layout{grid-template-columns:1fr}.entry-panel .panel-body{max-width:none}}@media(max-width:650px){header{padding:20px 15px}.brandmark{width:49px;height:49px;flex-basis:49px;border-radius:15px}.brand{font-size:19px}.subtitle{font-size:11px;line-height:1.5}.tag{font-size:10px}.wrap{}main{margin:19px auto;padding:0 12px 28px}.welcome h1{font-size:20px}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:15px 13px;border-radius:16px}.card .amount{font-size:19px}.card .label{font-size:9px;letter-spacing:.6px}.card .hint{font-size:10px}.panel{border-radius:16px}.panel-body{padding:15px}.panel-head{padding:16px}.toolbar{padding:12px}.toolbar select{width:100%;min-width:0}.toolbar input{min-width:100%}.two{grid-template-columns:1fr}.panel-head .actions{width:100%}.panel-head{flex-wrap:wrap}.panel-head .actions button{flex:1}}@media(max-width:360px){.cards{grid-template-columns:1fr}.brandlock{gap:10px}}
+@media print{body{background:#fff}header{background:#fff!important;color:#000;padding:10px 0}.subtitle{color:#333}.brandmark,.tag,.welcome,.entry-panel,.toolbar,.row-actions,.foot,.no-print{display:none!important}main{margin:0;padding:0}.cards{grid-template-columns:repeat(5,1fr)}.layout{display:block}.panel{box-shadow:none;margin-top:10px;background:#fff}.table-wrap{overflow:visible}table{min-width:0}th,td{padding:7px;font-size:10px}.card{padding:9px;background:#fff;box-shadow:none}.card .amount{font-size:15px}}
+
+/* Premium dark form fields with solar-yellow borders */
+.entry-panel .panel-body{background:linear-gradient(145deg,rgba(8,12,22,.96),rgba(10,17,32,.94));}
+.entry-panel label{color:#f5d96a;font-weight:750;letter-spacing:.25px}
+.entry-panel input,
+.entry-panel select,
+.entry-panel textarea{
+  background:#080c15!important;
+  color:#f3f6ff!important;
+  border:1px solid #d9b82f!important;
+  border-radius:10px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 0 0 1px rgba(255,212,71,.035);
+  color-scheme:dark;
+}
+.entry-panel input::placeholder,
+.entry-panel textarea::placeholder{color:#8794ad!important;opacity:1}
+.entry-panel input:focus,
+.entry-panel select:focus,
+.entry-panel textarea:focus{
+  border-color:#ffe16b!important;
+  box-shadow:0 0 0 3px rgba(255,212,71,.16),0 0 16px rgba(255,212,71,.07)!important;
+  outline:none;
+}
+.entry-panel select option{background:#080c15;color:#f3f6ff}
+.entry-panel .note{color:#aab6cb}
+@media print{
+ .entry-panel .panel-body{background:#fff!important}
+ .entry-panel label{color:#333!important}
+ .entry-panel input,.entry-panel select,.entry-panel textarea{background:#fff!important;color:#111!important;border:1px solid #888!important;box-shadow:none!important}
+}
+
+
+/* Consistent black controls with solar-yellow borders across every form and filter */
+input,select,textarea{
+ background:#080c15!important;
+ color:#f3f6ff!important;
+ border:1px solid #d9b82f!important;
+ border-radius:10px!important;
+ color-scheme:dark;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+input::placeholder,textarea::placeholder{color:#8794ad!important;opacity:1}
+input:focus,select:focus,textarea:focus{
+ border-color:#ffe16b!important;
+ box-shadow:0 0 0 3px rgba(255,212,71,.16),0 0 16px rgba(255,212,71,.07)!important;
+ outline:none;
+}
+select option{background:#080c15;color:#f3f6ff}
+label{color:#f5d96a}
+
+
+/* Dark glass title bar for the Add Payment Entry panel */
+.entry-panel > .panel-head{
+ background:linear-gradient(110deg,rgba(4,8,17,.99),rgba(12,26,52,.98))!important;
+ border-bottom:1px solid #d9b82f!important;
+ color:#f7f9ff!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.entry-panel > .panel-head h2{
+ color:#ffd447!important;
+ text-shadow:0 0 16px rgba(255,212,71,.12);
+}
+
+
+/* Visible live clock, PDF action, and business identity footer */
+.header-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:relative;z-index:2}
+.live-clock{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:9px 13px;border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.035));border:1px solid rgba(255,212,71,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 8px 24px rgba(0,0,0,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#ffd447;box-shadow:0 0 11px #ffd447;flex:0 0 8px}
+.clock-label{font-size:9px;font-weight:800;letter-spacing:1px;color:#ffd447}
+#headerClock{font-size:13px;font-weight:800;color:#fff;letter-spacing:.15px;font-variant-numeric:tabular-nums}
+.company-footer{margin-top:22px;padding:22px;border:1px solid rgba(255,212,71,.38);border-radius:18px;background:linear-gradient(145deg,rgba(10,17,32,.96),rgba(7,11,20,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 16px 36px rgba(0,0,0,.22);color:#eaf1ff}
+.footer-top{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid rgba(255,212,71,.2)}
+.footer-brand{display:flex;align-items:center;gap:11px}
+.footer-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;border:1px solid rgba(255,212,71,.55);background:linear-gradient(145deg,rgba(255,212,71,.17),rgba(54,125,255,.12));color:#ffd447;font-size:15px;font-weight:900;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.footer-brand div,.footer-owner,.footer-detail{display:flex;flex-direction:column;gap:5px}
+.footer-brand strong{font-size:17px;color:#fff;letter-spacing:.2px}
+.footer-brand span:not(.footer-mark){font-size:11px;color:#95a8c8}
+.footer-label{font-size:9px;letter-spacing:1.2px;font-weight:800;color:#ffd447}
+.footer-owner strong,.footer-detail strong{font-size:12px;line-height:1.6;color:#eaf1ff;font-weight:650}
+.footer-details{display:grid;grid-template-columns:minmax(180px,.7fr) minmax(260px,1.7fr);gap:22px;padding:17px 0}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.09);padding-top:14px;color:#92a3c1;font-size:11px}
+.footer-bottom strong{color:#ffd447}
+.pdf-btn{border-color:rgba(255,212,71,.55)!important;color:#ffe27a!important}
+@media(max-width:650px){.header-tools{width:100%;align-items:stretch}.live-clock{flex:1;justify-content:center}.footer-details{grid-template-columns:1fr;gap:14px}.company-footer{padding:16px}.footer-bottom{align-items:flex-start;flex-direction:column}}
+@media print{
+ .header-tools{display:none!important}
+ .company-footer{display:block!important;background:#fff!important;color:#111!important;border:1px solid #b49a35!important;box-shadow:none!important;break-inside:avoid}
+ .footer-top,.footer-details,.footer-bottom{border-color:#ddd!important}
+ .footer-brand strong,.footer-owner strong,.footer-detail strong{color:#111!important}
+ .footer-brand span:not(.footer-mark),.footer-bottom{color:#444!important}
+ .footer-label,.footer-bottom strong{color:#7b6100!important}
+ .footer-mark{color:#7b6100!important;background:#fff!important;box-shadow:none!important}
+ .foot{display:none!important}
+}
+
+
+/* Dashboard 2.0 enhancements */
+.analytics-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:15px}.mini-kpi{background:rgba(5,12,27,.8);border:1px solid rgba(255,212,71,.25);border-radius:13px;padding:13px}.mini-kpi span{display:block;color:#aebbd1;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px}.mini-kpi strong{display:block;color:#f4d65e;font-size:clamp(15px,2vw,22px);margin-top:7px;overflow-wrap:anywhere}.chart-box{background:rgba(5,12,27,.65);border:1px solid var(--line);border-radius:15px;padding:14px}.chart-title{font-size:12px;font-weight:800;margin-bottom:8px;color:#edf3ff}#cashflowChart{display:block;width:100%;height:190px}.chart-legend{display:flex;gap:15px;justify-content:center;color:#b8c5dc;font-size:11px}.chart-legend span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:3px;background:#3d83ff;margin-right:6px}.chart-legend span+span:before{background:#ffd447}#outstandingForm label{color:#f5d96a}#outstandingForm input,#outstandingForm select{background:#080c15!important;color:#f3f6ff!important;border:1px solid #d9b82f!important;color-scheme:dark}.overdue-pill{display:inline-block;padding:4px 7px;border-radius:20px;background:#451b29;color:#ff9aab;font-size:10px;font-weight:800}@media(max-width:650px){.analytics-kpis{grid-template-columns:1fr}.mini-kpi{padding:11px}.upgrade-panel .panel-body{padding:12px}.toolbar input[type=date]{min-width:100%;width:100%}}@media print{#analyticsPanel,#outstandingPanel,#backupBtn,#restoreBtn,#dateFrom,#dateTo{display:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><div class="brandlock"><div class="brandmark" aria-label="PKSolar and Satyam logo"><svg width="43" height="43" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Solar energy and electrical logo"><path d="M32 5 37 17 50 12 46 25 59 30 46 35 51 48 38 44 32 59 26 44 13 49 18 36 5 31 18 26 13 13 26 18 32 5Z" fill="#F7C85D"/><circle cx="32" cy="32" r="13" fill="#10264A" stroke="#8DE7D7" stroke-width="2.5"/><path d="M24 36 30 25 35 33 40 27" stroke="#8DE7D7" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 40H42" stroke="#fff" stroke-opacity=".8" stroke-width="2.5" stroke-linecap="round"/></svg></div><div><div class="brand"><span class="brand-primary">PKSolar</span><span class="brand-separator">|</span><span class="brand-partner">SATYAM ELECTRICAL <small>&amp; ENGINEERS</small></span></div><div class="subtitle">FINANCE &amp; PAYMENT MANAGEMENT</div></div></div><div class="header-tools"><div class="live-clock" aria-live="polite"><span class="live-dot"></span><span class="clock-label">LIVE LOCAL TIME</span><strong id="headerClock">Loading time…</strong></div><div class="tag">₹ INR &nbsp;·&nbsp; Business Ledger</div></div></div></header>
+<main>
+<div class="welcome"><div><h1>Payment Dashboard</h1><p>Track incoming funds, outgoing payments and business cash flow.</p></div><div class="today" id="todayLabel">Financial overview</div></div>
+<section class="cards">
+ <div class="card"><div class="label">Total Received</div><div class="amount green" id="totalReceived">₹0</div><div class="hint">All incoming payments</div></div>
+ <div class="card"><div class="label">Total Paid</div><div class="amount red" id="totalPaid">₹0</div><div class="hint">All outgoing payments</div></div>
+ <div class="card"><div class="label">Loan Received</div><div class="amount blue" id="loanTotal">₹0</div><div class="hint">Loan amount entries</div></div>
+ <div class="card"><div class="label">Solar Plate Payment</div><div class="amount gold" id="solarTotal">₹0</div><div class="hint">Solar plate expenses</div></div>
+ <div class="card"><div class="label">Inverter Payment</div><div class="amount gold" id="inverterTotal">₹0</div><div class="hint">Inverter expenses</div></div>
+ <div class="card"><div class="label">Net Balance</div><div class="amount" id="balance">₹0</div><div class="hint">Received minus paid</div></div>
+ <div class="card"><div class="label">Amount Balance to Satyam</div><div class="amount blue" id="satyamBalance">₹0</div><div class="hint">Satyam account · received minus paid</div></div>
+ <div class="card"><div class="label">Amount Balance in PKSolar</div><div class="amount green" id="pksolarBalance">₹0</div><div class="hint">PKSolar account · received minus paid</div></div>
+</section>
+<section class="panel upgrade-panel no-print" id="analyticsPanel" style="margin:0 0 18px">
+ <div class="panel-head"><h2>📊 Financial Analytics</h2><div class="actions" style="max-width:230px"><select id="analyticsRange" aria-label="Analytics period"><option value="month">This month</option><option value="year">This year</option><option value="all">All time</option></select></div></div>
+ <div class="panel-body"><div class="analytics-kpis"><div class="mini-kpi"><span>Period Received</span><strong id="periodReceived">₹0.00</strong></div><div class="mini-kpi"><span>Period Paid</span><strong id="periodPaid">₹0.00</strong></div><div class="mini-kpi"><span>Period Net</span><strong id="periodNet">₹0.00</strong></div></div><div class="chart-box"><div class="chart-title">Monthly cash flow</div><canvas id="cashflowChart" height="190" aria-label="Monthly cash flow chart"></canvas><div class="chart-legend"><span>Received</span><span>Paid</span></div></div></div>
+</section>
+<section class="panel upgrade-panel no-print" id="outstandingPanel" style="margin:0 0 18px">
+ <div class="panel-head"><h2>⏳ Outstanding Payments</h2><span class="tag">Receivables &amp; Payables</span></div><div class="panel-body">
+ <form id="outstandingForm"><div class="two"><div class="field"><label for="outParty">Party / Supplier *</label><input id="outParty" required placeholder="Enter party name"></div><div class="field"><label for="outDirection">Type *</label><select id="outDirection"><option value="receivable">To receive</option><option value="payable">To pay</option></select></div><div class="field"><label for="outAccount">Account *</label><select id="outAccount"><option>PKSolar</option><option>Satyam Electrical And Engineers</option><option>Common / Joint</option></select></div><div class="field"><label for="outDue">Due date</label><input id="outDue" type="date"></div><div class="field"><label for="outTotal">Total amount (₹) *</label><input id="outTotal" type="number" min="0.01" step="0.01" required placeholder="0.00"></div><div class="field"><label for="outPaid">Already settled (₹)</label><input id="outPaid" type="number" min="0" step="0.01" value="0" placeholder="0.00"></div></div><div class="actions"><button class="primary" type="submit">Add Outstanding</button><button class="plain" type="button" id="clearOutstanding">Clear Form</button></div></form>
+ <div class="analytics-kpis" style="margin-top:15px"><div class="mini-kpi"><span>To Receive</span><strong id="outReceivable">₹0.00</strong></div><div class="mini-kpi"><span>To Pay</span><strong id="outPayable">₹0.00</strong></div><div class="mini-kpi"><span>Overdue Items</span><strong id="outOverdue">0</strong></div></div>
+ <div class="table-wrap" style="margin-top:12px"><table style="min-width:650px"><thead><tr><th>Party</th><th>Account</th><th>Type</th><th>Due Date</th><th>Total</th><th>Settled</th><th>Remaining</th><th>Action</th></tr></thead><tbody id="outstandingRows"></tbody></table><div class="empty" id="outstandingEmpty">No outstanding items added yet.</div></div></div>
+</section>
+<div class="layout">
+<section class="panel entry-panel">
+ <div class="panel-head"><h2 id="formTitle">＋ Add Payment Entry</h2></div>
+ <div class="panel-body">
+  <form id="entryForm">
+   <input type="hidden" id="editId">
+   <div class="field"><label for="date">Transaction Date *</label><input id="date" type="date" required></div>
+   <div class="field"><label for="time">Transaction Time *</label><input id="time" type="time" required></div>
+   <div class="field"><label for="company">Company / Account *</label><select id="company" required><option>PKSolar</option><option>Satyam Electrical And Engineers</option><option>Common / Joint</option></select></div>
+   <div class="field"><label for="type">Entry Type *</label><select id="type" required>
+    <option value="received">Payment Received</option>
+    <option value="paid">Payment Paid</option>
+    <option value="loan">Loan Amount Received</option>
+    <option value="solar">Solar Plate Payment</option>
+    <option value="inverter">Inverter Payment</option>
+   </select></div>
+   <div class="field"><label for="party" id="partyLabel">Received from / Paid to *</label><input id="party" placeholder="Person / company name" required></div>
+   <div class="field"><label for="amount">Amount (₹) *</label><input id="amount" type="number" min="0.01" step="0.01" placeholder="Enter amount" required></div>
+   <div class="field"><label for="method">Payment Method</label><select id="method"><option>Bank Transfer</option><option>UPI</option><option>Cash</option><option>Cheque</option><option>Loan Disbursement</option><option>Other</option></select></div>
+   <div class="field"><label for="ref">Transaction ID / Reference (optional)</label><input id="ref" placeholder="UTR / UPI ref / bill number"></div>
+   <div class="field"><label for="notes">Description / Notes</label><textarea id="notes" rows="2" placeholder="Example: 10 solar plates, advance, balance payment..."></textarea></div>
+   <button class="primary" type="submit" id="saveBtn">Save Entry</button>
+   <div class="actions" style="margin-top:9px"><button class="secondary" type="button" id="cancelEdit" style="display:none">Cancel Edit</button><button class="plain" type="button" id="resetForm">Clear Form</button></div>
+  </form>
+  <p class="note">Record each transaction with the correct account, counterparty, amount and payment reference. Entries are stored locally in this browser on this device.</p>
+ </div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2>Transaction History</h2><div class="actions no-print"><button class="secondary" id="exportBtn">Export CSV</button><button class="secondary" id="backupBtn">Backup Data</button><button class="secondary" id="restoreBtn">Restore Backup</button><input type="file" id="restoreFile" accept=".json,application/json" hidden><button class="secondary pdf-btn type="button" onclick="window.print()">Save / Share PDF</button><button class="secondary" onclick="window.print()">Print</button></div></div>
+ <div class="toolbar no-print"><input id="search" placeholder="Search person, company, notes..."><input id="dateFrom" type="date" aria-label="From date" title="From date"><input id="dateTo" type="date" aria-label="To date" title="To date"><select id="filterType"><option value="all">All entry types</option><option value="received">Payment received</option><option value="paid">Payment paid</option><option value="loan">Loan received</option><option value="solar">Solar plate payment</option><option value="inverter">Inverter payment</option></select><select id="filterCompany"><option value="all">All accounts</option><option>PKSolar</option><option>Satyam Electrical And Engineers</option><option>Common / Joint</option></select></div>
+ <div class="table-wrap"><table><thead><tr><th>Date &amp; Time</th><th>Account</th><th>Type</th><th>Person / Party</th><th>Method / Reference</th><th>Amount</th><th>Notes</th><th class="row-actions">Action</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty">No entries yet. Add your first payment using the form.</div></div>
+</section>
+</div>
+<footer class="company-footer">
+ <div class="footer-top">
+  <div class="footer-brand"><span class="footer-mark">PK</span><div><strong>PKSolar</strong><span>Solar Energy Solutions</span></div></div>
+  <div class="footer-owner"><span class="footer-label">OWNER</span><strong>Prashant Kirange</strong></div>
+ </div>
+ <div class="footer-details">
+  <div class="footer-detail"><span class="footer-label">MOBILE</span><strong>9764168664&nbsp; / &nbsp;9518583128</strong></div>
+  <div class="footer-detail"><span class="footer-label">OFFICE ADDRESS</span><strong>PKSolar, Shree Dairy, Gangai Niwas, Bhusawal, Jalgaon, Maharashtra – 425201</strong></div>
+ </div>
+ <div class="footer-bottom"><span>© 2026 PKSolar. All rights reserved.</span><span>Made by <strong>Chaitanya Kirange</strong></span></div>
+</footer>
+</main>
+<script>
+const KEY='pksolar_satyam_payment_ledger_v1';
+const $=id=>document.getElementById(id);
+let entries=[];
+try{entries=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){entries=[]}
+function setCurrentDateTime(){
+ const now=new Date();
+ const localDate=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);
+ const liveText=now.toLocaleString('en-IN',{weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+ $('todayLabel').textContent=liveText;
+ const clock=$('headerClock');if(clock)clock.textContent=now.toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+ return {date:localDate,time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false})};
+}
+const currentDT=setCurrentDateTime();
+$('date').value=currentDT.date;
+$('time').value=currentDT.time;
+setInterval(setCurrentDateTime,1000);
+const money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+const typeName={received:'Payment Received',paid:'Payment Paid',loan:'Loan Received',solar:'Solar Plate Payment',inverter:'Inverter Payment'};
+function save(){localStorage.setItem(KEY,JSON.stringify(entries));render()}
+function updateLabels(){let t=$('type').value;$('partyLabel').textContent=t==='paid'?'Paid to *': 'Received from / Party *';$('party').placeholder=t==='paid'?'Who did you pay?':'Who paid you / lender / supplier';}
+$('type').addEventListener('change',updateLabels);
+function resetForm(){ $('entryForm').reset();$('editId').value='';function setCurrentDateTime(){
+ const now=new Date();
+ const localDate=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);
+ const liveText=now.toLocaleString('en-IN',{weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+ $('todayLabel').textContent=liveText;
+ const clock=$('headerClock');if(clock)clock.textContent=now.toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+ return {date:localDate,time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false})};
+}
+const currentDT=setCurrentDateTime();
+$('date').value=currentDT.date;
+$('time').value=currentDT.time;
+setInterval(setCurrentDateTime,1000);$('formTitle').textContent='＋ Add Payment Entry';$('saveBtn').textContent='Save Entry';$('cancelEdit').style.display='none';updateLabels()}
+$('resetForm').onclick=resetForm;$('cancelEdit').onclick=resetForm;
+$('entryForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const id=$('editId').value||String(Date.now())+'-'+Math.random().toString(16).slice(2,7);
+ const type=$('type').value, amount=Number($('amount').value);
+ const old=entries.find(x=>x.id===id);
+ const item={id,date:$('date').value,time:$('time').value,company:$('company').value,type,party:$('party').value.trim(),amount,method:$('method').value,ref:$('ref').value.trim(),notes:$('notes').value.trim(),created:old?.created||Date.now()};
+ if(!item.party||!Number.isFinite(amount)||amount<=0)return;
+ const i=entries.findIndex(x=>x.id===id);if(i>=0)entries[i]=item;else entries.push(item);
+ entries.sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created);save();resetForm();
+});
+function render(){
+ const totalReceived=entries.filter(x=>['received','loan'].includes(x.type)).reduce((s,x)=>s+x.amount,0);
+ const totalPaid=entries.filter(x=>['paid','solar','inverter'].includes(x.type)).reduce((s,x)=>s+x.amount,0);
+ const loan=entries.filter(x=>x.type==='loan').reduce((s,x)=>s+x.amount,0);
+ const solar=entries.filter(x=>x.type==='solar').reduce((s,x)=>s+x.amount,0);
+ const inverter=entries.filter(x=>x.type==='inverter').reduce((s,x)=>s+x.amount,0);
+ $('totalReceived').textContent=money(totalReceived);$('totalPaid').textContent=money(totalPaid);$('loanTotal').textContent=money(loan);$('solarTotal').textContent=money(solar);$('inverterTotal').textContent=money(inverter);
+ $('balance').textContent=money(totalReceived-totalPaid);$('balance').className='amount '+(totalReceived-totalPaid>=0?'green':'red');
+ const accountBalance=name=>entries.filter(x=>x.company===name).reduce((sum,x)=>sum+(['received','loan'].includes(x.type)?x.amount:-x.amount),0);
+ const satyamBalance=accountBalance('Satyam Electrical And Engineers');
+ const pksolarBalance=accountBalance('PKSolar');
+ $('satyamBalance').textContent=money(satyamBalance);$('satyamBalance').className='amount '+(satyamBalance>=0?'blue':'red');
+ $('pksolarBalance').textContent=money(pksolarBalance);$('pksolarBalance').className='amount '+(pksolarBalance>=0?'green':'red');
+ const q=$('search').value.toLowerCase(),ft=$('filterType').value,fc=$('filterCompany').value;
+ const from=$('dateFrom')?.value||'',to=$('dateTo')?.value||'';const shown=entries.filter(x=>(ft==='all'||x.type===ft)&&(fc==='all'||x.company===fc)&&(!from||x.date>=from)&&(!to||x.date<=to)&&[x.party,x.company,x.notes,x.ref,x.method,typeName[x.type]].join(' ').toLowerCase().includes(q));
+ $('rows').innerHTML=shown.map(x=>`<tr><td>${esc(x.date)}<br><span style="color:#9eb3d9;font-size:11px">${esc(x.time||'—')}</span></td><td>${esc(x.company)}</td><td><span class="pill ${x.type==='received'?'in':x.type==='paid'?'out':x.type==='loan'?'loan':x.type==='solar'?'solar':'solar'}">${esc(typeName[x.type])}</span></td><td><b>${esc(x.party)}</b></td><td>${esc(x.method||'—')}<br><span style="color:#758198">${esc(x.ref||'')}</span></td><td class="amount-cell ${['received','loan'].includes(x.type)?'green':'red'}">${['received','loan'].includes(x.type)?'+':'−'}${money(x.amount)}</td><td>${esc(x.notes||'—')}</td><td class="row-actions"><button class="smallbtn secondary" onclick="editEntry('${x.id}')">Edit</button><button class="smallbtn danger" onclick="deleteEntry('${x.id}')">Delete</button></td></tr>`).join('');
+ $('empty').style.display=shown.length?'none':'block';
+}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+window.editEntry=id=>{const x=entries.find(y=>y.id===id);if(!x)return;$('editId').value=x.id;for(const k of ['date','time','company','type','party','amount','method','ref','notes'])$(k).value=x[k]??'';$('formTitle').textContent='✎ Edit Payment Entry';$('saveBtn').textContent='Update Entry';$('cancelEdit').style.display='block';updateLabels();window.scrollTo({top:0,behavior:'smooth'})};
+window.deleteEntry=id=>{const x=entries.find(y=>y.id===id);if(x&&confirm('Delete this entry for '+x.party+' ('+money(x.amount)+')?')){entries=entries.filter(y=>y.id!==id);save();if($('editId').value===id)resetForm()}};
+$('search').addEventListener('input',render);$('filterType').addEventListener('change',render);$('filterCompany').addEventListener('change',render);
+$('exportBtn').onclick=()=>{const cols=['date','time','company','type','party','amount','method','ref','notes'];const lines=[cols.join(','),...entries.map(x=>cols.map(k=>'"'+String(k==='type'?typeName[x[k]]:x[k]??'').replace(/"/g,'""')+'"').join(','))];const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='PKSolar_Satyam_Payment_Ledger.csv';a.click();URL.revokeObjectURL(a.href)};
+
+// Dashboard 2.0: analytics, outstanding ledger and backup/restore.
+const OUT_KEY='pksolar_satyam_outstanding_v1';let outstanding=[];try{outstanding=JSON.parse(localStorage.getItem(OUT_KEY)||'[]');if(!Array.isArray(outstanding))outstanding=[]}catch(e){outstanding=[]}
+function persistOutstanding(){localStorage.setItem(OUT_KEY,JSON.stringify(outstanding));renderOutstanding();renderAnalytics()}
+function renderOutstanding(){const today=new Date().toISOString().slice(0,10);let rec=0,pay=0,over=0;outstanding.forEach(x=>{const rem=Math.max(0,Number(x.total)-Number(x.paid));if(x.direction==='receivable')rec+=rem;else pay+=rem;if(rem>0&&x.due&&x.due<today)over++});$('outReceivable').textContent=money(rec);$('outPayable').textContent=money(pay);$('outOverdue').textContent=String(over);$('outstandingRows').innerHTML=outstanding.map(x=>{const rem=Math.max(0,Number(x.total)-Number(x.paid));return `<tr><td><b>${esc(x.party)}</b>${x.due&&x.due<today&&rem>0?'<br><span class="overdue-pill">OVERDUE</span>':''}</td><td>${esc(x.account)}</td><td>${x.direction==='receivable'?'To receive':'To pay'}</td><td>${esc(x.due||'—')}</td><td>${money(x.total)}</td><td>${money(x.paid)}</td><td class="amount-cell">${money(rem)}</td><td><button class="smallbtn secondary" onclick="settleOutstanding('${x.id}')">Settle</button><button class="smallbtn danger" onclick="deleteOutstanding('${x.id}')">Delete</button></td></tr>`}).join('');$('outstandingEmpty').style.display=outstanding.length?'none':'block'}
+$('outstandingForm').addEventListener('submit',e=>{e.preventDefault();const total=Number($('outTotal').value),paid=Number($('outPaid').value||0);if(!Number.isFinite(total)||total<=0||!Number.isFinite(paid)||paid<0||paid>total){alert('Please enter valid amounts. Settled amount cannot exceed total amount.');return}outstanding.unshift({id:String(Date.now())+'-'+Math.random().toString(16).slice(2,6),party:$('outParty').value.trim(),direction:$('outDirection').value,account:$('outAccount').value,due:$('outDue').value,total,paid,created:Date.now()});persistOutstanding();$('outstandingForm').reset();$('outPaid').value='0'});$('clearOutstanding').onclick=()=>$('outstandingForm').reset();
+window.settleOutstanding=id=>{const x=outstanding.find(y=>y.id===id);if(!x)return;const rem=Math.max(0,Number(x.total)-Number(x.paid));const value=prompt('Additional settled amount (remaining '+money(rem)+'):',String(rem));if(value===null)return;const n=Number(value);if(!Number.isFinite(n)||n<0||n>rem){alert('Enter an amount between 0 and '+rem);return}x.paid=Number(x.paid)+n;persistOutstanding()};window.deleteOutstanding=id=>{if(confirm('Delete this outstanding item?')){outstanding=outstanding.filter(x=>x.id!==id);persistOutstanding()}};
+function renderAnalytics(){const mode=$('analyticsRange').value,now=new Date();const period=entries.filter(x=>{const d=new Date((x.date||'')+'T12:00:00');if(Number.isNaN(d.getTime()))return false;return mode==='month'?d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth():mode==='year'?d.getFullYear()===now.getFullYear():true});const incoming=x=>['received','loan'].includes(x.type);const received=period.filter(incoming).reduce((a,x)=>a+Number(x.amount||0),0),paid=period.filter(x=>!incoming(x)).reduce((a,x)=>a+Number(x.amount||0),0);$('periodReceived').textContent=money(received);$('periodPaid').textContent=money(paid);$('periodNet').textContent=money(received-paid);$('periodNet').style.color=received-paid>=0?'#35d7ae':'#ff8293';const c=$('cashflowChart');if(!c)return;const w=Math.max(280,c.clientWidth||600),h=190,dpr=window.devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;const ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);const months=[];for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push({label:d.toLocaleDateString('en-IN',{month:'short'}),y:d.getFullYear(),m:d.getMonth(),r:0,p:0})}entries.forEach(x=>{const d=new Date((x.date||'')+'T12:00:00'),m=months.find(z=>z.y===d.getFullYear()&&z.m===d.getMonth());if(m){if(incoming(x))m.r+=Number(x.amount||0);else m.p+=Number(x.amount||0)}});const max=Math.max(1,...months.flatMap(m=>[m.r,m.p])),left=12,right=8,top=15,bottom=28,ph=h-top-bottom,pw=w-left-right,gw=pw/months.length,bw=Math.min(15,gw*.25);ctx.font='10px system-ui';ctx.textAlign='center';for(let j=0;j<4;j++){const y=top+ph*j/3;ctx.strokeStyle='rgba(160,180,215,.16)';ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-right,y);ctx.stroke()}months.forEach((m,i)=>{const x=left+gw*(i+.5),rh=m.r/max*ph,phh=m.p/max*ph;ctx.fillStyle='#3d83ff';ctx.fillRect(x-bw-2,top+ph-rh,bw,rh);ctx.fillStyle='#ffd447';ctx.fillRect(x+2,top+ph-phh,bw,phh);ctx.fillStyle='#aebbd1';ctx.fillText(m.label,x,h-9)})}
+$('analyticsRange').addEventListener('change',renderAnalytics);window.addEventListener('resize',renderAnalytics);['dateFrom','dateTo'].forEach(id=>$(id).addEventListener('change',render));
+$('backupBtn').onclick=()=>{const payload={app:'PKSolar Satyam Finance Dashboard',version:2,exportedAt:new Date().toISOString(),transactions:entries,outstanding};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='PKSolar_Finance_Backup_'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};$('restoreBtn').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text()),tx=Array.isArray(data)?data:data.transactions;if(!Array.isArray(tx)||!tx.every(x=>x&&x.id&&x.date&&x.type&&Number.isFinite(Number(x.amount))))throw new Error('This file does not contain a valid transaction backup.');const os=Array.isArray(data.outstanding)?data.outstanding:[];if(!confirm('Restore '+tx.length+' transactions and '+os.length+' outstanding items? Current dashboard records will be replaced. Download a backup first if you need to keep them.'))return;entries=tx;outstanding=os;localStorage.setItem(KEY,JSON.stringify(entries));localStorage.setItem(OUT_KEY,JSON.stringify(outstanding));render();renderOutstanding();renderAnalytics();alert('Backup restored successfully.')}catch(err){alert('Could not restore backup: '+err.message)}finally{e.target.value=''}});
+
+render();updateLabels();renderOutstanding();renderAnalytics();
+
+</script>
+</body></html>
